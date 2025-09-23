@@ -149,4 +149,106 @@ class MoneyTest {
         // Then
         assertEquals(new BigDecimal(expected), result.amount());
     }
+
+    @Test
+    @DisplayName("Should not be equal to null")
+    void shouldNotBeEqualToNull() {
+        // Given
+        Money money = Money.of(new BigDecimal("100.50"));
+
+        // Then
+        assertNotEquals(null, money);
+    }
+
+    @Test
+    @DisplayName("Should not be equal to different class")
+    void shouldNotBeEqualToDifferentClass() {
+        // Given
+        Money money = Money.of(new BigDecimal("100.50"));
+        String string = "100.50";
+
+        // Then
+        assertNotEquals(money, string);
+    }
+
+    @Test
+    @DisplayName("Should handle negative amounts")
+    void shouldHandleNegativeAmounts() {
+        // Given
+        Money negativeMoney = Money.of(new BigDecimal("-50.25"));
+
+        // Then
+        assertEquals(new BigDecimal("-50.25"), negativeMoney.amount());
+        assertEquals(-5025L, negativeMoney.cents());
+    }
+
+    @Test
+    @DisplayName("Should handle subtraction resulting in negative")
+    void shouldHandleSubtractionResultingInNegative() {
+        // Given
+        Money money1 = Money.of(new BigDecimal("25.00"));
+        Money money2 = Money.of(new BigDecimal("50.00"));
+
+        // When
+        Money result = money1.minus(money2);
+
+        // Then
+        assertEquals(new BigDecimal("-25"), result.amount());
+    }
+
+    @Test
+    @DisplayName("Should strip trailing zeros")
+    void shouldStripTrailingZeros() {
+        // Given
+        Money money = Money.of(new BigDecimal("100.00"));
+
+        // Then
+        assertEquals(new BigDecimal("100"), money.amount());
+        assertEquals("100", money.toString());
+    }
+
+    @Test
+    @DisplayName("Should handle multiplication by zero")
+    void shouldHandleMultiplicationByZero() {
+        // Given
+        Money money = Money.of(new BigDecimal("100.50"));
+
+        // When
+        Money result = money.times(0);
+
+        // Then
+        assertEquals(BigDecimal.ZERO, result.amount());
+    }
+
+    @Test
+    @DisplayName("Should handle multiplication by negative number")
+    void shouldHandleMultiplicationByNegativeNumber() {
+        // Given
+        Money money = Money.of(new BigDecimal("100.50"));
+
+        // When
+        Money result = money.times(-2);
+
+        // Then
+        assertEquals(new BigDecimal("-201"), result.amount());
+    }
+
+    @Test
+    @DisplayName("Should maintain immutability in operations")
+    void shouldMaintainImmutabilityInOperations() {
+        // Given
+        Money original = Money.of(new BigDecimal("100.50"));
+        Money other = Money.of(new BigDecimal("50.25"));
+
+        // When
+        Money added = original.plus(other);
+        Money subtracted = original.minus(other);
+        Money multiplied = original.times(2);
+
+        // Then
+        assertEquals(new BigDecimal("100.5"), original.amount()); // Original unchanged
+        assertEquals(new BigDecimal("150.75"), added.amount());
+        assertEquals(new BigDecimal("50.25"), subtracted.amount());
+        assertEquals(new BigDecimal("201"), multiplied.amount());
+    }
 }

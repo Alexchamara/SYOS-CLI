@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="cli.cashier.checkout.CliCheckoutTest" time="0.013" tests="0" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="24"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/alexchamara/Documents/SYOS/syos_pos copy/target/test-classes:/Users/alexchamara/Documents/SYOS/syos_pos copy/target/classes:/Users/alexchamara/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/Users/alexchamara/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/Users/alexchamara/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/Users/alexchamara/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/alexchamara/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/Users/alexchamara/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/Users/alexchamara/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/alexchamara/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/Users/alexchamara/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/Users/alexchamara/.m2/repository/org/mockito/mockito-core/5.6.0/mockito-core-5.6.0.jar:/Users/alexchamara/.m2/repository/net/bytebuddy/byte-buddy/1.14.8/byte-buddy-1.14.8.jar:/Users/alexchamara/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.8/byte-buddy-agent-1.14.8.jar:/Users/alexchamara/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/alexchamara/.m2/repository/org/mockito/mockito-junit-jupiter/5.6.0/mockito-junit-jupiter-5.6.0.jar:/Users/alexchamara/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/Users/alexchamara/.m2/repository/org/testcontainers/junit-jupiter/1.19.0/junit-jupiter-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/postgresql/1.19.0/postgresql-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/jdbc/1.19.0/jdbc-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/database-commons/1.19.0/database-commons-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/testcontainers/1.19.0/testcontainers-1.19.0.jar:/Users/alexchamara/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/alexchamara/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/alexchamara/.m2/repository/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.jar:/Users/alexchamara/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/alexchamara/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-api/3.3.3/docker-java-api-3.3.3.jar:/Users/alexchamara/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.3.3/docker-java-transport-zerodep-3.3.3.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-transport/3.3.3/docker-java-transport-3.3.3.jar:/Users/alexchamara/.m2/repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar:/Users/alexchamara/.m2/repository/com/github/stefanbirkner/system-lambda/1.2.1/system-lambda-1.2.1.jar:/Users/alexchamara/.m2/repository/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.jar:/Users/alexchamara/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/Users/alexchamara/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/alexchamara/.m2/repository/org/json/json/20230618/json-20230618.jar:/Users/alexchamara/.m2/repository/net/jodah/concurrentunit/0.4.6/concurrentunit-0.4.6.jar:/Users/alexchamara/.m2/repository/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar:/Users/alexchamara/.m2/repository/commons-io/commons-io/2.13.0/commons-io-2.13.0.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="net.bytebuddy.experimental" value="true"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="24"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-24.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/alexchamara/Documents/SYOS/syos_pos copy/target/surefire/surefirebooter-20250923110731201_3.jar /Users/alexchamara/Documents/SYOS/syos_pos copy/target/surefire 2025-09-23T11-07-31_148-jvmRun1 surefire-20250923110731201_1tmp surefire_0-20250923110731201_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/alexchamara/Documents/SYOS/syos_pos copy/target/test-classes:/Users/alexchamara/Documents/SYOS/syos_pos copy/target/classes:/Users/alexchamara/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/Users/alexchamara/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/Users/alexchamara/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/Users/alexchamara/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/alexchamara/.m2/repository/ch/qos/logback/logback-classic/1.4.11/logback-classic-1.4.11.jar:/Users/alexchamara/.m2/repository/ch/qos/logback/logback-core/1.4.11/logback-core-1.4.11.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/Users/alexchamara/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/alexchamara/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/Users/alexchamara/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:/Users/alexchamara/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/Users/alexchamara/.m2/repository/org/mockito/mockito-core/5.6.0/mockito-core-5.6.0.jar:/Users/alexchamara/.m2/repository/net/bytebuddy/byte-buddy/1.14.8/byte-buddy-1.14.8.jar:/Users/alexchamara/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.8/byte-buddy-agent-1.14.8.jar:/Users/alexchamara/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/alexchamara/.m2/repository/org/mockito/mockito-junit-jupiter/5.6.0/mockito-junit-jupiter-5.6.0.jar:/Users/alexchamara/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/Users/alexchamara/.m2/repository/org/testcontainers/junit-jupiter/1.19.0/junit-jupiter-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/postgresql/1.19.0/postgresql-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/jdbc/1.19.0/jdbc-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/database-commons/1.19.0/database-commons-1.19.0.jar:/Users/alexchamara/.m2/repository/org/testcontainers/testcontainers/1.19.0/testcontainers-1.19.0.jar:/Users/alexchamara/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/alexchamara/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/alexchamara/.m2/repository/org/apache/commons/commons-compress/1.23.0/commons-compress-1.23.0.jar:/Users/alexchamara/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/alexchamara/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-api/3.3.3/docker-java-api-3.3.3.jar:/Users/alexchamara/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.3.3/docker-java-transport-zerodep-3.3.3.jar:/Users/alexchamara/.m2/repository/com/github/docker-java/docker-java-transport/3.3.3/docker-java-transport-3.3.3.jar:/Users/alexchamara/.m2/repository/net/java/dev/jna/jna/5.12.1/jna-5.12.1.jar:/Users/alexchamara/.m2/repository/com/github/stefanbirkner/system-lambda/1.2.1/system-lambda-1.2.1.jar:/Users/alexchamara/.m2/repository/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.jar:/Users/alexchamara/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/Users/alexchamara/.m2/repository/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar:/Users/alexchamara/.m2/repository/org/json/json/20230618/json-20230618.jar:/Users/alexchamara/.m2/repository/net/jodah/concurrentunit/0.4.6/concurrentunit-0.4.6.jar:/Users/alexchamara/.m2/repository/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar:/Users/alexchamara/.m2/repository/commons-io/commons-io/2.13.0/commons-io-2.13.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/alexchamara"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-24.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/alexchamara/Documents/SYOS/syos_pos copy"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/alexchamara/Documents/SYOS/syos_pos copy/target/surefire/surefirebooter-20250923110731201_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="24.0.2+12-54"/>
+    <property name="user.name" value="alexchamara"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="/Users/alexchamara/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/var/folders/7y/rnvnrlmd79s2nhcc1j721yz80000gn/T/"/>
+    <property name="java.version" value="24.0.2"/>
+    <property name="user.dir" value="/Users/alexchamara/Documents/SYOS/syos_pos copy"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/alexchamara/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="24.0.2+12-54"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="68.0"/>
+  </properties>
+  <testcase name="shouldHandleEmptyImplementation" classname="Implementation Status Tests" time="0.0"/>
+  <testcase name="wouldHandleCheckoutWorkflowIfImplemented" classname="Implementation Status Tests" time="0.0"/>
+  <testcase name="wouldSupportBarcodeScanningIfImplemented" classname="Implementation Status Tests" time="0.001"/>
+  <testcase name="shouldHandleInputValidation" classname="User Interface Requirements" time="0.0"/>
+  <testcase name="shouldDisplayClearPromptsAndMessages" classname="User Interface Requirements" time="0.0"/>
+  <testcase name="shouldSupportUndoOperations" classname="User Interface Requirements" time="0.001"/>
+  <testcase name="shouldSupportInteractiveInputHandling" classname="Future Implementation Requirements" time="0.001">
+    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:179)
+	at cli.cashier.checkout.CliCheckoutTest$FutureImplementationRequirements.shouldSupportInteractiveInputHandling(CliCheckoutTest.java:126)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+]]></failure>
+  </testcase>
+  <testcase name="shouldIntegrateWithCheckoutUseCase" classname="Future Implementation Requirements" time="0.001"/>
+  <testcase name="shouldSupportCashPaymentProcessing" classname="Future Implementation Requirements" time="0.0"/>
+  <testcase name="shouldExtendCliCommandIfImplemented" classname="Future Implementation Requirements" time="0.0"/>
+</testsuite>

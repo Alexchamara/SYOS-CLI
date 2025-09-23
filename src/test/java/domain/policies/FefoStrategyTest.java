@@ -112,9 +112,9 @@ class FefoStrategyTest {
     }
 
     @Test
-    @DisplayName("Should not throw when inventory repository is null (constructor does not enforce)")
-    void shouldNotThrowWhenInventoryRepositoryIsNull() {
+    @DisplayName("Should throw exception when inventory repository is null")
+    void shouldThrowExceptionWhenInventoryRepositoryIsNull() {
         // When & Then
-        assertDoesNotThrow(() -> new FefoStrategy(null));
+        assertThrows(NullPointerException.class, () -> new FefoStrategy(null));
     }
 }

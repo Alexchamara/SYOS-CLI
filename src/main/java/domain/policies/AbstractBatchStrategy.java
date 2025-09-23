@@ -12,6 +12,9 @@ public abstract class AbstractBatchStrategy implements BatchSelectionStrategy {
     protected final InventoryRepository inventory;
 
     protected AbstractBatchStrategy(InventoryRepository inventory) {
+        if (inventory == null) {
+            throw new NullPointerException("Inventory repository cannot be null");
+        }
         this.inventory = inventory;
     }
 
