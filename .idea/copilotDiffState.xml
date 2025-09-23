@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/main/java/domain/repository/WebUserRepository.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/java/domain/repository/WebUserRepository.java" />
+              <option name="originalContent" value="&#10;&#10;&#10;&#10;&#10;" />
+              <option name="updatedContent" value="// This file is deprecated and should be deleted.&#10;// The CustomerRepository interface has been moved to CustomerRepository.java&#10;// This file is kept only to avoid breaking any existing imports during transition." />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/infrastructure/persistence/JdbcWebUserRepository.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/java/infrastructure/persistence/JdbcWebUserRepository.java" />
+              <option name="originalContent" value="&#10;" />
+              <option name="updatedContent" value="package main.java.infrastructure.persistence;&#10;&#10;import main.java.domain.model.User;&#10;import main.java.domain.repository.CustomerRepository;&#10;&#10;import javax.sql.DataSource;&#10;import java.sql.Connection;&#10;import java.sql.PreparedStatement;&#10;import java.sql.ResultSet;&#10;import java.sql.Statement;&#10;&#10;/**&#10; * JDBC implementation of CustomerRepository&#10; */&#10;public final class JdbcCustomerRepository implements CustomerRepository {&#10;    private final DataSource dataSource;&#10;&#10;    public JdbcCustomerRepository(DataSource dataSource) {&#10;        this.dataSource = dataSource;&#10;    }&#10;&#10;    @Override&#10;    public long create(String email, String passwordHash, String fullName) {&#10;        try (Connection con = dataSource.getConnection();&#10;             PreparedStatement ps = con.prepareStatement(&#10;                     &quot;INSERT INTO users (email, password_hash, full_name, role, username, created_at) VALUES (?, ?, ?, 'USER', ?, NOW())&quot;,&#10;                     Statement.RETURN_GENERATED_KEYS)) {&#10;&#10;            ps.setString(1, email);&#10;            ps.setString(2, passwordHash);&#10;            ps.setString(3, fullName);&#10;            ps.setString(4, email); // Use email as username for WEB users&#10;&#10;            ps.executeUpdate();&#10;&#10;            try (ResultSet rs = ps.getGeneratedKeys()) {&#10;                if (rs.next()) {&#10;                    return rs.getLong(1);&#10;                }&#10;                throw new RuntimeException(&quot;Failed to get generated user ID&quot;);&#10;            }&#10;        } catch (Exception e) {&#10;            throw new RuntimeException(&quot;Failed to create user&quot;, e);&#10;        }&#10;    }&#10;&#10;    @Override&#10;    public User findByEmail(String email) {&#10;        try (Connection con = dataSource.getConnection();&#10;             PreparedStatement ps = con.prepareStatement(&#10;                     &quot;SELECT id, email, full_name FROM users WHERE email = ? AND role = 'USER'&quot;)) {&#10;&#10;            ps.setString(1, email);&#10;&#10;            try (ResultSet rs = ps.executeQuery()) {&#10;                if (rs.next()) {&#10;                    return new User(&#10;                            rs.getLong(&quot;id&quot;),&#10;                            rs.getString(&quot;email&quot;),&#10;                            rs.getString(&quot;full_name&quot;)&#10;                    );&#10;                }&#10;                return null;&#10;            }&#10;        } catch (Exception e) {&#10;            throw new RuntimeException(&quot;Failed to find user by email&quot;, e);&#10;        }&#10;    }&#10;&#10;    @Override&#10;    public String passwordHashByEmail(String email) {&#10;        try (Connection con = dataSource.getConnection();&#10;             PreparedStatement ps = con.prepareStatement(&#10;                     &quot;SELECT password_hash FROM users WHERE email = ? AND role = 'USER'&quot;)) {&#10;&#10;            ps.setString(1, email);&#10;&#10;            try (ResultSet rs = ps.executeQuery()) {&#10;                if (rs.next()) {&#10;                    return rs.getString(&quot;password_hash&quot;);&#10;                }&#10;                return null;&#10;            }&#10;        } catch (Exception e) {&#10;            throw new RuntimeException(&quot;Failed to get password hash&quot;, e);&#10;        }&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/resources/db/migration/V16__create_orders_tables.sql">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/resources/db/migration/V16__create_orders_tables.sql" />
+              <option name="updatedContent" value="-- Create orders table for web shop orders&#10;CREATE TABLE orders (&#10;    id BIGINT AUTO_INCREMENT PRIMARY KEY,&#10;    bill_serial BIGINT NOT NULL,&#10;    type VARCHAR(20) NOT NULL,&#10;    location VARCHAR(20) NOT NULL,&#10;    user_id BIGINT,&#10;    total_gross DECIMAL(10,2) NOT NULL,&#10;    discount DECIMAL(10,2) NOT NULL DEFAULT 0,&#10;    total_net DECIMAL(10,2) NOT NULL,&#10;    status VARCHAR(20) NOT NULL DEFAULT 'PREVIEW',&#10;    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,&#10;    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,&#10;    FOREIGN KEY (user_id) REFERENCES customers(id) ON DELETE SET NULL&#10;);&#10;&#10;-- Create order_lines table for web shop order items&#10;CREATE TABLE order_lines (&#10;    id BIGINT AUTO_INCREMENT PRIMARY KEY,&#10;    order_id BIGINT NOT NULL,&#10;    product_code VARCHAR(50) NOT NULL,&#10;    name VARCHAR(255) NOT NULL,&#10;    unit_price DECIMAL(10,2) NOT NULL,&#10;    qty INT NOT NULL,&#10;    line_total DECIMAL(10,2) NOT NULL,&#10;    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE&#10;);&#10;&#10;-- Create payments table for web shop payments&#10;CREATE TABLE payments (&#10;    id BIGINT AUTO_INCREMENT PRIMARY KEY,&#10;    order_id BIGINT NOT NULL,&#10;    payment_type VARCHAR(20) NOT NULL DEFAULT 'CARD',&#10;    card_last4 VARCHAR(4),&#10;    auth_reference VARCHAR(100),&#10;    amount DECIMAL(10,2) NOT NULL,&#10;    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,&#10;    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE&#10;);" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

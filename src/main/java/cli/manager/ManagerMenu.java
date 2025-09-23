@@ -1,0 +1,79 @@
+package cli.manager;
+
+import application.services.ShortageEventService;
+import application.reports.ReorderReport;
+import application.usecase.DiscountManagementUseCase;
+import cli.manager.product.ProductManagementCLI;
+import cli.manager.batch.BatchManagementCLI;
+import cli.manager.category.CategoryManagementCLI;
+import cli.manager.discount.DiscountManagementCLI;
+import domain.user.User;
+import javax.sql.DataSource;
+import java.util.Scanner;
+
+public final class ManagerMenu {
+    private final DataSource ds;
+    private final Runnable checkout;
+    private final ShortageEventService shortageEvents;
+    private final Runnable receiveToMain;
+    private final Runnable transferFromMain;
+    private final ProductManagementCLI productManagement;
+    private final BatchManagementCLI batchManagement;
+    private final CategoryManagementCLI categoryManagement;
+    private final ManagerConsole managerConsole;
+    private final User currentUser;
+    private final DiscountManagementUseCase discountManagementUseCase;
+
+    public ManagerMenu(DataSource ds, Runnable checkout, ShortageEventService shortageEvents,
+                      Runnable receiveToMain, Runnable transferFromMain,
+                      ProductManagementCLI productManagement, BatchManagementCLI batchManagement,
+                      CategoryManagementCLI categoryManagement, User currentUser,
+                      DiscountManagementUseCase discountManagementUseCase) {
+        this.ds = ds;
+        this.checkout = checkout;
+        this.shortageEvents = shortageEvents;
+        this.receiveToMain = receiveToMain;
+        this.transferFromMain = transferFromMain;
+        this.productManagement = productManagement;
+        this.batchManagement = batchManagement;
+        this.categoryManagement = categoryManagement;
+        this.managerConsole = new ManagerConsole(ds);
+        this.currentUser = currentUser;
+        this.discountManagementUseCase = discountManagementUseCase;
+    }
+
+    public void run() {
+        var sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n[MANAGER] 1) Manager Console  2) Checkout  3) Reorder <50  4) Show Shortages  5) Transfer Batch MAIN->SHELF/WEB  6) Product Management  7) Batch Management  8) Category Management  9) Discount Management  0) Logout");
+            switch (sc.nextLine().trim()) {
+                case "1" -> managerConsole.run();
+                case "2" -> checkout.run();
+                case "3" -> new ReorderReport(ds, 50).run();
+                case "4" -> showShortages(sc);
+                case "5" -> transferFromMain.run();
+                case "6" -> productManagement.run();
+                case "7" -> batchManagement.run();
+                case "8" -> categoryManagement.run();
+                case "9" -> new DiscountManagementCLI(currentUser, discountManagementUseCase).run();
+                case "0" -> { return; }
+                default -> System.out.println("?");
+            }
+        }
+    }
+
+    private void showShortages(Scanner sc) {
+        var events = shortageEvents.list();
+        if (events.isEmpty()) {
+            System.out.println("No shortage notifications.");
+            return;
+        }
+        System.out.println("-- Shortage Notifications --");
+        for (var e : events) System.out.println(e);
+        System.out.print("Clear all? [y/N]: ");
+        if ("y".equalsIgnoreCase(sc.nextLine().trim())) {
+            shortageEvents.clear();
+            System.out.println("Cleared.");
+        }
+    }
+}
