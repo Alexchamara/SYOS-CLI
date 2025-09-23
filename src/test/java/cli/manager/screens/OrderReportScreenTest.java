@@ -10,8 +10,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import cli.manager.screens.OrderReportScreen;
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.OrderHeaderRow;
 import application.reports.dto.OrderLineRow;
 import cli.manager.filters.ReportFilters;

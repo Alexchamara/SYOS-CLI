@@ -1,4 +1,4 @@
-package application.reports;
+package application.services;
 
 import application.reports.dto.DailySalesRow;
 import application.reports.dto.ReshelveRow;

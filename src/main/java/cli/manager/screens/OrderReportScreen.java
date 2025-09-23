@@ -1,6 +1,6 @@
 package cli.manager.screens;
 
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.OrderHeaderRow;
 import application.reports.dto.OrderLineRow;
 import cli.manager.filters.FiltersPrompt;

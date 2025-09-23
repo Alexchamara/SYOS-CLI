@@ -34,7 +34,6 @@ cli/manager/filters/ReportFiltersTest$EdgeCaseTests.class
 domain/pricing/DiscountPolicyTest$TestDiscountPolicy.class
 application/reports/dto/BillHeaderRowTest$RecordCreationTests.class
 domain/shared/MoneyTest.class
-cli/manager/category/CategoryManagementCLITest$ConstructorTests.class
 application/reports/dto/ReorderRowTest$SortEnumTests.class
 application/reports/ReportServiceTest$DailySalesReportTests.class
 cli/manager/screens/DailySalesScreenTest$ConstructorTests.class
@@ -50,7 +49,6 @@ cli/CliCommandTest$TestCliCommand.class
 cli/manager/screens/ReshelveScreenTest$DataFormattingTests.class
 application/usecase/BatchManagementUseCaseTest$EnumTests.class
 infrastructure/persistence/JdbcBillRepositoryTest$EdgeCaseTests.class
-application/services/BillNumberServiceTest$ServiceImplementationTests.class
 application/reports/ReorderReportTest$FutureImplementationRequirements.class
 config/DbTest$ConfigurationValidationTests.class
 application/reports/dto/BillHeaderRowTest$EdgeCaseTests.class
@@ -68,7 +66,6 @@ infrastructure/persistence/JdbcCartRepositoryTest$ResourceManagementTests.class
 infrastructure/concurrency/TxTest.class
 cli/signin/LoginScreenTest$FutureImplementationRequirements.class
 config/DbTest$ConfigurationImplementationTests.class
-cli/manager/category/CategoryManagementCLITest$MenuDisplayTests.class
 infrastructure/events/SimpleBusTest$EventPublishingTests.class
 application/reports/dto/ReorderRowTest.class
 config/DbTest$PerformanceConfigurationTests.class
@@ -159,7 +156,6 @@ infrastructure/events/SimpleBusTest.class
 cli/manager/ReceiveToMainCLITest$ConstructorTests.class
 cli/manager/ReceiveToMainCLITest$ViewRecentReceiptsTests.class
 cli/manager/screens/BillReportScreenTest$ScreenDisplayTests.class
-application/services/OrderIdServiceTest$ServiceImplementationTests.class
 application/usecase/CheckoutUseCaseTest$ConstructorTests.class
 application/usecase/OnlineCartUseCaseTest$CartCalculationsTests.class
 domain/repository/ReportRepositoryTest$FilterIntegrationTests.class
@@ -238,7 +234,6 @@ application/reports/ReportServiceTest$StockBatchesReportTests.class
 cli/SeedUsersTest$StaticUtilityMethodTests.class
 infrastructure/persistence/JdbcShortageEventRepositoryTest$SaveShortageEventTests.class
 domain/inventory/BatchTest.class
-cli/manager/category/CategoryManagementCLITest$InputValidationTests.class
 domain/shared/QuantityTest.class
 cli/manager/screens/OrderReportScreenTest$DateFilterTests.class
 application/services/ShortageEventServiceTest$EdgeCaseTests.class
@@ -265,7 +260,6 @@ cli/manager/screens/ReorderScreenTest.class
 infrastructure/persistence/JdbcCategoryRepositoryTest$FindAllTests.class
 application/services/DiscountServiceTest$PricingResultTests.class
 application/usecase/AuthenticationUseCaseTest$SessionRecordTests.class
-cli/manager/category/CategoryManagementCLITest$DeleteCategoryTests.class
 cli/manager/table/TablePrinterTest$DataTypeHandlingTests.class
 cli/manager/filters/FiltersPromptTest$UtilityMethodTests.class
 infrastructure/events/LowStockPrinterTest$TestDomainEvent.class
@@ -392,7 +386,6 @@ cli/manager/product/ProductManagementCLITest$AddProductManualCodeTests.class
 domain/repository/PaymentRepositoryTest.class
 config/DbTest$UtilityMethodTests.class
 infrastructure/persistence/JdbcPaymentRepositoryTest$EdgeCaseTests.class
-cli/manager/category/CategoryManagementCLITest$AddCategoryTests.class
 cli/SeedUsersTest$ExceptionHandlingTests.class
 infrastructure/persistence/JdbcReportRepositoryTest$ReshelveReportTests.class
 cli/webshop/WebShopMenuTest.class
@@ -433,7 +426,6 @@ application/usecase/OnlineCartUseCaseTest.class
 infrastructure/persistence/JdbcCartRepositoryTest$RemoveItemTests.class
 application/services/DiscountServiceTest$ApplyBestDiscountTests.class
 config/DbTest$AdditionalSecurityConfigurationTests.class
-cli/manager/category/CategoryManagementCLITest$ViewCategoryTests.class
 cli/manager/screens/BillReportScreenTest$InputValidationTests.class
 infrastructure/persistence/JdbcPaymentRepositoryTest.class
 infrastructure/persistence/SqlDiscountRepositoryTest$ConstructorTests.class
@@ -456,7 +448,6 @@ application/services/AvailabilityServiceTest$EdgeCaseTests.class
 infrastructure/persistence/JdbcPaymentRepositoryTest$SaveCardPaymentTests.class
 cli/manager/screens/DailySalesScreenTest$ScreenDisplayTests.class
 application/reports/dto/StockBatchRowTest.class
-cli/manager/category/CategoryManagementCLITest$ViewAllCategoriesTests.class
 infrastructure/persistence/SqlDiscountRepositoryTest$FindActiveDiscountsTests.class
 application/services/DiscountServiceTest.class
 config/DbTest$IntegrationTests.class
@@ -484,8 +475,5 @@ infrastructure/persistence/JdbcPaymentRepositoryTest$ResourceManagementTests.cla
 application/usecase/ReceiveFromSupplierUseCaseTest$EdgeCaseTests.class
 PasswordEncoderTest$PasswordVerificationTests.class
 domain/events/EventPublisherTest.class
-application/services/OrderIdServiceTest$FutureImplementationRequirements.class
-application/services/BillNumberServiceTest$FutureImplementationRequirements.class
-cli/manager/category/CategoryManagementCLITest.class
 infrastructure/persistence/SqlDiscountRepositoryTest$FindByBatchIdTests.class
 PasswordEncoderTest$FutureImplementationRequirements.class

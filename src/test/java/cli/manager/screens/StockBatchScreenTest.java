@@ -10,8 +10,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import cli.manager.screens.StockBatchScreen;
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.StockBatchRow;
 import cli.manager.filters.ReportFilters;
 

@@ -1,6 +1,6 @@
 package cli.manager;
 
-import application.reports.ReportService;
+import application.services.ReportService;
 import cli.manager.screens.*;
 import cli.manager.screens.DailySalesScreen;
 import infrastructure.persistence.JdbcReportRepository;

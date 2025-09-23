@@ -1,6 +1,6 @@
 package cli.manager.screens;
 
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.BillHeaderRow;
 import application.reports.dto.BillLineRow;
 import cli.manager.filters.FiltersPrompt;
@@ -92,7 +92,7 @@ public class BillReportScreen {
         TablePrinter.printBillLinesTable(rows, total);
 
         System.out.print("Press Enter to continue...");
-        new Scanner(System.in).nextLine();
+        scanner.nextLine();
     }
 
     private String formatFilters(ReportFilters filters) {

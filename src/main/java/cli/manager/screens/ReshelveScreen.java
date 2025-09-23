@@ -1,6 +1,6 @@
 package cli.manager.screens;
 
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.ReshelveRow;
 import cli.manager.filters.FiltersPrompt;
 import cli.manager.filters.ReportFilters;

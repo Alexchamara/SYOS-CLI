@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import application.reports.ReportService;
+import application.services.ReportService;
 import application.reports.dto.*;
 import cli.manager.filters.ReportFilters;
 import domain.repository.ReportRepository;

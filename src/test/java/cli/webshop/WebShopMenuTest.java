@@ -10,9 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("WebShopMenu Tests")
 class WebShopMenuTest {
 
+    private AutoCloseable closeable;
+
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
     }
 
     @Nested
@@ -53,7 +55,7 @@ class WebShopMenuTest {
             assertEquals(9, expectedMenuOptions.length);
             for (String option : expectedMenuOptions) {
                 assertNotNull(option);
-                assertTrue(option.length() > 0);
+                assertFalse(option.isEmpty());
             }
         }
 
@@ -68,12 +70,16 @@ class WebShopMenuTest {
             // - Order tracking
 
             String[] navigationFeatures = {
-                "CATEGORY_BROWSE", "PRODUCT_SEARCH", "PAGINATION",
+                "CATEGORY_BROWSE", "PRODUCT_SEARCH", "PRODUCT_PAGINATION",
                 "CART_MANAGEMENT", "ORDER_TRACKING"
             };
 
+            // Test that all features follow the underscore naming convention
             for (String feature : navigationFeatures) {
-                assertTrue(feature.contains("_"));
+                assertNotNull(feature);
+                assertFalse(feature.isEmpty());
+                assertTrue(feature.contains("_"),
+                    "Feature '" + feature + "' should contain underscore for consistency");
             }
         }
     }
@@ -207,7 +213,7 @@ class WebShopMenuTest {
             };
 
             for (String feature : accessibilityFeatures) {
-                assertTrue(feature.length() > 0);
+                assertFalse(feature.isEmpty());
             }
         }
     }

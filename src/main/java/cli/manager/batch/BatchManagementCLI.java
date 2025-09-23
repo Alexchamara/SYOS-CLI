@@ -14,9 +14,16 @@ public final class BatchManagementCLI {
     private final Scanner scanner;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    // Constructor for production use
     public BatchManagementCLI(BatchManagementUseCase batchUseCase) {
         this.batchUseCase = batchUseCase;
         this.scanner = new Scanner(System.in);
+    }
+
+    // Constructor for testing - allows injection of Scanner
+    public BatchManagementCLI(BatchManagementUseCase batchUseCase, Scanner scanner) {
+        this.batchUseCase = batchUseCase;
+        this.scanner = scanner;
     }
 
     public void run() {
