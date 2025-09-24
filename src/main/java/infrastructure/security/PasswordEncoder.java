@@ -22,6 +22,10 @@ public final class PasswordEncoder {
      * Format: salt$hashedPassword
      */
     public String hash(String raw) {
+        if (raw == null) {
+            throw new IllegalArgumentException("Password cannot be null");
+        }
+
         try {
             // Generate random salt
             byte[] salt = generateSalt();
@@ -45,6 +49,10 @@ public final class PasswordEncoder {
      * Check if a raw password matches the hashed password
      */
     public boolean matches(String raw, String hash) {
+        if (raw == null || hash == null) {
+            throw new IllegalArgumentException("Password and hash cannot be null");
+        }
+
         try {
             // Split salt and hash
             String[] parts = hash.split("\\" + SEPARATOR);

@@ -276,7 +276,8 @@ class AvailabilityServiceTest {
                 Function<Connection, Map<StockLocation, Integer>> function = (Function<Connection, Map<StockLocation, Integer>>) invocation.getArgument(0);
                 return function.apply(connection);
             });
-            when(inventoryRepository.totalAvailable(connection, productCode, any())).thenReturn(0);
+            // Use matchers for all arguments to avoid mixing raw values with matchers
+            when(inventoryRepository.totalAvailable(any(Connection.class), eq(productCode), anyString())).thenReturn(0);
 
             // When
             Map<StockLocation, Integer> result = availabilityService.getAvailabilityAcrossAllLocations(productCode);

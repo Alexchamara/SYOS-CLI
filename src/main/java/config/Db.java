@@ -30,21 +30,21 @@ public class Db implements AutoCloseable {
 
     // Classpath locations inside src/main/resources
     private static final String[] MIGRATION_SCRIPTS = {
-            "main/resources/db/migration/V1__create_users_table.sql",
-            "main/resources/db/migration/V2__init_product_and_batch.sql",
-            "main/resources/db/migration/V3__billing_tables.sql",
-//            "main/resources/db/migration/V4__seed_household_products.sql",
-            "main/resources/db/migration/V5__bill_number_sequence.sql",
-            "main/resources/db/migration/V6__check_availability.sql",
-            "main/resources/db/migration/V7__notify_shortage.sql",
-            "main/resources/db/migration/V8__main_store_location.sql",
-            "main/resources/db/migration/V9__inventory_movement_log.sql",
-            "main/resources/db/migration/V10__create_category_table.sql",
-            "main/resources/db/migration/V11__cart_and_cart_item_table.sql",
-            "main/resources/db/migration/V12__create_orders_tables.sql",
-            "main/resources/db/migration/V14__update_bill_scopes.sql",
-            "main/resources/db/migration/V15__add_full_name_to_users.sql",
-            "main/resources/db/migration/V16__create_discount_table.sql"
+            "db/migration/V1__create_users_table.sql",
+            "db/migration/V2__init_product_and_batch.sql",
+            "db/migration/V3__billing_tables.sql",
+//            "db/migration/V4__seed_household_products.sql",
+            "db/migration/V5__bill_number_sequence.sql",
+            "db/migration/V6__check_availability.sql",
+            "db/migration/V7__notify_shortage.sql",
+            "db/migration/V8__main_store_location.sql",
+            "db/migration/V9__inventory_movement_log.sql",
+            "db/migration/V10__create_category_table.sql",
+            "db/migration/V11__cart_and_cart_item_table.sql",
+            "db/migration/V12__create_orders_tables.sql",
+            "db/migration/V14__update_bill_scopes.sql",
+            "db/migration/V15__add_full_name_to_users.sql",
+            "db/migration/V16__create_discount_table.sql"
     };
 
     private final Properties properties;

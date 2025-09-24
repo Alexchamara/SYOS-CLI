@@ -6,6 +6,7 @@ import domain.shared.Code;
 import domain.shared.Money;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +60,7 @@ public final class ProductManagementUseCase {
             this.code = product.code().value();
             this.name = product.name();
             // Normalize to 2 decimal places for consistent equality checks in tests
-            this.price = product.price().amount().setScale(2);
+            this.price = product.price().amount().setScale(2, RoundingMode.HALF_UP);
         }
 
         public String code() { return code; }
@@ -83,11 +84,24 @@ public final class ProductManagementUseCase {
         Code code = new Code(request.code());
         Optional<Product> existingProduct = productRepository.findByCode(code);
 
-        Product product = new Product(
-            code,
-            request.name(),
-            Money.of(request.price())
-        );
+        Product product;
+        if (existingProduct.isPresent()) {
+            // When updating, preserve the existing category
+            String existingCategory = existingProduct.get().categoryCode();
+            product = new Product(
+                code,
+                request.name(),
+                Money.of(request.price()),
+                existingCategory
+            );
+        } else {
+            // When creating new, use the basic constructor (no category)
+            product = new Product(
+                code,
+                request.name(),
+                Money.of(request.price())
+            );
+        }
 
         productRepository.upsert(product);
 

@@ -64,7 +64,11 @@ public final class JdbcInventoryRepository implements InventoryRepository {
             ps.setInt(3, take);
             int updated = ps.executeUpdate();
             if (updated == 0) throw new IllegalStateException("Concurrent update or insufficient qty for batch " + batchId);
-        } catch (Exception e) { throw new RuntimeException(e); }
+        } catch (IllegalStateException e) {
+            throw e; // Re-throw IllegalStateException as is
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

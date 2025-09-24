@@ -50,6 +50,9 @@ public final class FiltersPrompt {
     private static LocalDate promptForSingleDate(Scanner scanner) {
         while (true) {
             System.out.print("Enter date (yyyy-mm-dd) or 'today'/'yesterday': ");
+            if (!scanner.hasNextLine()) {
+                return LocalDate.now();
+            }
             String input = scanner.nextLine();
             try {
                 return parseDate(input);
@@ -62,6 +65,9 @@ public final class FiltersPrompt {
     private static LocalDate promptForFromDate(Scanner scanner) {
         while (true) {
             System.out.print("Enter from date (yyyy-mm-dd): ");
+            if (!scanner.hasNextLine()) {
+                return LocalDate.now(); // Default to today if no input available
+            }
             String input = scanner.nextLine();
             try {
                 return parseDate(input);
@@ -74,6 +80,9 @@ public final class FiltersPrompt {
     private static LocalDate promptForToDate(Scanner scanner, LocalDate fromDate) {
         while (true) {
             System.out.print("Enter to date (yyyy-mm-dd): ");
+            if (!scanner.hasNextLine()) {
+                return fromDate; // Default to fromDate if no input available
+            }
             String input = scanner.nextLine();
             try {
                 LocalDate toDate = parseDate(input);
@@ -82,6 +91,21 @@ public final class FiltersPrompt {
                     continue;
                 }
                 return toDate;
+            } catch (DateTimeParseException | NullPointerException e) {
+                System.out.println("Invalid date format. Please use yyyy-mm-dd");
+            }
+        }
+    }
+
+    private static LocalDate promptForToDate(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter to date (yyyy-mm-dd): ");
+            if (!scanner.hasNextLine()) {
+                return LocalDate.now(); // Default to today if no input available
+            }
+            String input = scanner.nextLine();
+            try {
+                return parseDate(input);
             } catch (DateTimeParseException | NullPointerException e) {
                 System.out.println("Invalid date format. Please use yyyy-mm-dd");
             }

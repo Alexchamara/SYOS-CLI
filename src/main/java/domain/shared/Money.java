@@ -23,6 +23,8 @@ public final class Money {
         return (o instanceof Money m) && amount.compareTo(m.amount)==0;
     }
     @Override public int hashCode() { return Objects.hash(amount); }
-    @Override public String toString() { return amount.toPlainString(); }
+    @Override public String toString() {
+        return amount.setScale(2, java.math.RoundingMode.HALF_UP).toPlainString();
+    }
 
 }

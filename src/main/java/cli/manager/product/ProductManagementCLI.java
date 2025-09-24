@@ -20,6 +20,13 @@ public final class ProductManagementCLI {
         this.scanner = new Scanner(System.in);
     }
 
+    // Constructor for testing
+    public ProductManagementCLI(ProductManagementUseCase productUseCase, CategoryManagementUseCase categoryUseCase, Scanner scanner) {
+        this.productUseCase = productUseCase;
+        this.categoryUseCase = categoryUseCase;
+        this.scanner = scanner;
+    }
+
     public void run() {
         while (true) {
             displayMenu();

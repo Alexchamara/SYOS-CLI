@@ -15,16 +15,29 @@ public final class Tx {
             try {
                 T result = work.apply(con);
                 con.commit();
+                con.setAutoCommit(old);
                 return result;
             } catch (RuntimeException e) {
-                con.rollback();
-                throw e;
-            } catch (Exception e) {
-                con.rollback();
-                throw new RuntimeException(e);
-            } finally {
+                try {
+                    con.rollback();
+                } catch (Exception rollbackEx) {
+                    // If rollback fails, throw rollback exception
+                    throw new RuntimeException(rollbackEx);
+                }
                 con.setAutoCommit(old);
+                throw new RuntimeException(e.getMessage(), e);
+            } catch (Exception e) {
+                try {
+                    con.rollback();
+                } catch (Exception rollbackEx) {
+                    // Preserve original exception message if rollback fails
+                    throw new RuntimeException(e.getMessage(), e);
+                }
+                con.setAutoCommit(old);
+                throw new RuntimeException(e.getMessage(), e);
             }
+        } catch (RuntimeException e) {
+            throw e; // Re-throw RuntimeException as is
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

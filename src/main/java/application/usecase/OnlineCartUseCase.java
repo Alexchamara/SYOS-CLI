@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Unified use case for online cart operations (add, view, remove) with discount support
  */
-public final class OnlineCartUseCase {
+public class OnlineCartUseCase {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final DiscountService discountService;
@@ -72,6 +72,25 @@ public final class OnlineCartUseCase {
     public void removeFromCart(long userId, String productCode) {
         long cartId = cartRepository.getOrCreateCart(userId);
         cartRepository.removeItem(cartId, productCode);
+    }
+
+    /**
+     * Update item quantity in cart
+     */
+    public UpdateItemResult updateItemQuantity(long userId, String productCode, int newQuantity) {
+        if (newQuantity < 0) {
+            return new UpdateItemResult(false, null, "Quantity cannot be negative");
+        }
+
+        long cartId = cartRepository.getOrCreateCart(userId);
+
+        if (newQuantity == 0) {
+            cartRepository.removeItem(cartId, productCode);
+        } else {
+            cartRepository.upsertItem(cartId, productCode, newQuantity);
+        }
+
+        return new UpdateItemResult(true, viewCart(userId), null);
     }
 
     private CartLineView toCartLineView(CartRepository.CartItem item) {
@@ -187,5 +206,43 @@ public final class OnlineCartUseCase {
         public CartLineView(String productCode, String productName, Money unitPrice, int qty, Money lineTotal) {
             this(productCode, productName, unitPrice, unitPrice, qty, lineTotal, lineTotal, null);
         }
+    }
+
+    /**
+     * Remove item result class
+     */
+    public static class RemoveItemResult {
+        public final boolean success;
+        public final CartView cart;
+        public final String errorMessage;
+
+        public RemoveItemResult(boolean success, CartView cart, String errorMessage) {
+            this.success = success;
+            this.cart = cart;
+            this.errorMessage = errorMessage;
+        }
+
+        public boolean success() { return success; }
+        public CartView cart() { return cart; }
+        public String errorMessage() { return errorMessage; }
+    }
+
+    /**
+     * Update item result class
+     */
+    public static class UpdateItemResult {
+        public final boolean success;
+        public final CartView cart;
+        public final String errorMessage;
+
+        public UpdateItemResult(boolean success, CartView cart, String errorMessage) {
+            this.success = success;
+            this.cart = cart;
+            this.errorMessage = errorMessage;
+        }
+
+        public boolean success() { return success; }
+        public CartView cart() { return cart; }
+        public String errorMessage() { return errorMessage; }
     }
 }

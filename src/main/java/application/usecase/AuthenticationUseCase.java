@@ -1,4 +1,4 @@
-package application.usecase;
+package main.java.application.usecase;
 
 import domain.repository.UserRepository;
 import domain.user.Role;

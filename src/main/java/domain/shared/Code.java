@@ -7,7 +7,7 @@ public final class Code {
 
     public Code(String value) {
         if (value == null || value.isBlank()) throw new IllegalArgumentException("Product Code cannot be null or blank");
-        this.value = value.trim();
+        this.value = value.trim().toUpperCase();
     }
 
     public String value() { return value; }

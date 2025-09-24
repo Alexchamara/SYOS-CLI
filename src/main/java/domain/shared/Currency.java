@@ -21,7 +21,7 @@ public final class Currency {
     }
 
     public static String formatSimple(BigDecimal amount) {
-        return SYMBOL + " " + amount.toPlainString();
+        return SYMBOL + " " + amount.setScale(2, java.math.RoundingMode.HALF_UP).toPlainString();
     }
 
     public static String formatSimple(Money money) {

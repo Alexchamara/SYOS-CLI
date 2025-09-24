@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class DiscountManagementCLI {
     private final DiscountManagementUseCase discountUseCase;
     private final User currentUser;
-    private final Scanner scanner;
+    private Scanner scanner;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public DiscountManagementCLI(User currentUser, DiscountManagementUseCase discountUseCase) {
@@ -27,6 +27,7 @@ public class DiscountManagementCLI {
     }
 
     public void run() {
+        this.scanner = new Scanner(System.in);
         while (true) {
             printMenu();
             String choice = scanner.nextLine().trim();

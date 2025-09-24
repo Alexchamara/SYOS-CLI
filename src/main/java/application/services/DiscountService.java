@@ -4,6 +4,7 @@ import application.usecase.DiscountManagementUseCase;
 import domain.pricing.Discount;
 import domain.shared.Money;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -92,9 +93,20 @@ public class DiscountService {
                 return "No discount";
             }
 
-            String typeDescription = appliedDiscount.getType() == Discount.DiscountType.PERCENTAGE
-                ? appliedDiscount.getValue() + "% off"
-                : "$" + appliedDiscount.getValue() + " off";
+            String typeDescription;
+            if (appliedDiscount.getType() == Discount.DiscountType.PERCENTAGE) {
+                // Format percentage without unnecessary trailing zeros for display
+                BigDecimal value = appliedDiscount.getValue();
+                // Remove trailing zeros but keep at least one decimal place if needed
+                String formattedValue = value.stripTrailingZeros().toPlainString();
+                // If it's a whole number, add .0 for consistency with test expectations
+                if (!formattedValue.contains(".")) {
+                    formattedValue += ".0";
+                }
+                typeDescription = formattedValue + "% off";
+            } else {
+                typeDescription = "$" + appliedDiscount.getValue() + " off";
+            }
 
             return typeDescription + (appliedDiscount.getDescription() != null
                 ? " (" + appliedDiscount.getDescription() + ")"

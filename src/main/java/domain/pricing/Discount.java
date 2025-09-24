@@ -80,4 +80,25 @@ public final class Discount {
     public enum DiscountType {
         PERCENTAGE, FIXED_AMOUNT
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Discount discount = (Discount) obj;
+        return id == discount.id &&
+               batchId == discount.batchId &&
+               isActive == discount.isActive &&
+               createdBy == discount.createdBy &&
+               type == discount.type &&
+               java.util.Objects.equals(value, discount.value) &&
+               java.util.Objects.equals(startDate, discount.startDate) &&
+               java.util.Objects.equals(endDate, discount.endDate) &&
+               java.util.Objects.equals(description, discount.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, batchId, type, value, startDate, endDate, isActive, description, createdBy);
+    }
 }
