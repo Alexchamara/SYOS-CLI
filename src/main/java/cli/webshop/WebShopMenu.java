@@ -26,7 +26,7 @@ public final class WebShopMenu {
     public WebShopMenu(
             Scanner scanner,
             AuthenticationUseCase authUseCase,
-            AuthenticationUseCase unused, // Keep for backward compatibility but ignore
+            AuthenticationUseCase unused,
             SearchProductUseCase searchUseCase,
             OnlineCartUseCase onlineCartUseCase,
             CheckoutUseCase checkoutUseCase,
@@ -320,7 +320,6 @@ public final class WebShopMenu {
         requireLogin();
 
         try {
-            // First show preview
             var cartView = onlineCartUseCase.viewCart(currentUserId);
 
             if (cartView.lines.isEmpty()) {
@@ -328,11 +327,9 @@ public final class WebShopMenu {
                 return;
             }
 
-            // Apply automatic discounts only - no manual discount entry for web users
             DiscountPolicy discountPolicy = new BatchDiscountPolicy(discountService);
             System.out.println("Checking for automatic discounts...");
 
-            // Show detailed pre-bill with automatic discount calculations
             displayPreBill(cartView, discountPolicy);
 
             System.out.print("Proceed to payment? (y/n): ");
@@ -343,16 +340,13 @@ public final class WebShopMenu {
                 return;
             }
 
-            // Get card details
             CardDetails cardDetails = getCardDetails();
             if (cardDetails == null) {
                 return; // User cancelled or invalid card
             }
 
-            // Process checkout
             var result = checkoutUseCase.checkoutCard(currentUserId, discountPolicy, cardDetails);
 
-            // Show final bill after successful checkout
             displayFinalBill(result, cardDetails);
 
         } catch (CheckoutUseCase.InsufficientStockException e) {
@@ -384,11 +378,9 @@ public final class WebShopMenu {
 
         System.out.println("-".repeat(70));
 
-        // Calculate discount details using the cart view's discount information
         double subtotal = cartView.subtotal.cents() / 100.0;
         System.out.printf("%-55s Rs.%12.2f%n", "Subtotal:", subtotal);
 
-        // Check if we have discount information from the enhanced cart view
         if (cartView.totalDiscount != null && cartView.totalDiscount.cents() > 0) {
             double discountAmount = cartView.totalDiscount.cents() / 100.0;
             double finalTotal = cartView.discountedSubtotal.cents() / 100.0;
@@ -397,7 +389,6 @@ public final class WebShopMenu {
             System.out.println("-".repeat(70));
             System.out.printf("%-55s Rs.%12.2f%n", "TOTAL AFTER DISCOUNT:", finalTotal);
         } else {
-            // Fallback: check for manual percentage discount (backward compatibility)
             if (discountPolicy instanceof PercentDiscount percentDiscount) {
                 double discountPercent = percentDiscount.getPercentage();
                 double discountAmount = subtotal * (discountPercent / 100.0);

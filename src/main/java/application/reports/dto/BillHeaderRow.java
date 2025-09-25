@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public record BillHeaderRow(
     int rowNo,
     long orderId,
-    String serial,  // Changed from long to String to handle values like 'C-000001'
+    String serial,
     String type,
     String store,
     LocalDateTime createdAt,

@@ -36,7 +36,6 @@ public class BillReportScreen {
                 })
                 .toList();
 
-            // Show all data without pagination
             TablePrinter.printBillHeaderTable(rows, 0, 1);
 
             System.out.println("\nFilters: " + formatFilters(filters));

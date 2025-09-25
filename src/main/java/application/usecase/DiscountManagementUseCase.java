@@ -36,7 +36,7 @@ public class DiscountManagementUseCase {
 
         try {
             Discount discount = new Discount(
-                0, // ID will be generated
+                0,
                 request.getBatchId(),
                 request.getDiscountType(),
                 request.getDiscountValue(),
@@ -176,7 +176,6 @@ public class DiscountManagementUseCase {
         return ValidationResult.valid();
     }
 
-    // Request and Response classes
     public static class CreateDiscountRequest extends DiscountRequestBase {
         public CreateDiscountRequest(long batchId, Discount.DiscountType discountType,
                                    BigDecimal discountValue, LocalDate startDate,

@@ -21,7 +21,6 @@ public final class TablePrinter {
         MONEY_FORMAT.setMaximumFractionDigits(2);
     }
 
-    // ===== New typed API expected by tests =====
     public static void printDailySalesTable(List<DailySalesRow> rows) {
         String[] headers = {"Product Code", "Product Name", "Location", "Qty Sold", "Gross", "Discount", "Net"};
         int[] widths = {14, 25, 12, 10, 12, 12, 12};
@@ -92,7 +91,6 @@ public final class TablePrinter {
         }
     }
 
-    // ===== Existing lower-level APIs retained (lightly adjusted for utility) =====
     public static void printDailySalesTable(List<Object[]> rows, int pageIndex, int totalPages) {
         String[] headers = {"#", "Code", "Name", "Location", "Qty", "Gross", "Discount", "Net"};
         int[] widths = {4, 10, 26, 8, 8, 12, 12, 12};
@@ -106,13 +104,13 @@ public final class TablePrinter {
                 Object[] row = rows.get(i);
                 printRow(new String[]{
                     String.valueOf(i + 1),
-                    truncate((String) row[0], widths[1]),      // Code
-                    truncate((String) row[1], widths[2]),      // Name
-                    truncate((String) row[2], widths[3]),      // Location
-                    formatNumber((Integer) row[3]),            // Qty
-                    formatMoney((BigDecimal) row[4]),          // Gross
-                    formatMoney((BigDecimal) row[5]),          // Discount
-                    formatMoney((BigDecimal) row[6])           // Net
+                    truncate((String) row[0], widths[1]),
+                    truncate((String) row[1], widths[2]),
+                    truncate((String) row[2], widths[3]),
+                    formatNumber((Integer) row[3]),
+                    formatMoney((BigDecimal) row[4]),
+                    formatMoney((BigDecimal) row[5]),
+                    formatMoney((BigDecimal) row[6])
                 }, widths);
             }
 

@@ -25,8 +25,7 @@ public final class CardDetails {
     public String cvv() { return cvv; }
 
     /**
-     * Validates card details according to business rules (no Luhn check)
-     * @return true if valid, false otherwise
+     * Validates card details according to business rules
      */
     public boolean isValid() {
         return isValidNumber() && isValidCvv() && isValidExpiry();

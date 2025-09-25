@@ -25,15 +25,11 @@ public final class BatchDiscountPolicy implements DiscountPolicy {
         LocalDate today = LocalDate.now();
 
         for (BillLine line : lines) {
-            // For each line, find the best discount available for the product
-            // Note: In a real implementation, you'd need to track which batch
-            // each line item comes from. For now, we'll use product code.
 
             var activeDiscounts = discountService.getActiveDiscountsForProduct(
                 line.productCode().value(), today);
 
             if (!activeDiscounts.isEmpty()) {
-                // Find the best discount for this line
                 var bestDiscount = activeDiscounts.stream()
                     .max((d1, d2) -> {
                         Money discount1 = d1.calculateDiscountAmount(line.unitPrice());

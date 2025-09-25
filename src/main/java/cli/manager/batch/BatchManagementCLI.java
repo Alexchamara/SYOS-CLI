@@ -20,7 +20,6 @@ public final class BatchManagementCLI {
         this.scanner = new Scanner(System.in);
     }
 
-    // Constructor for testing - allows injection of Scanner
     public BatchManagementCLI(BatchManagementUseCase batchUseCase, Scanner scanner) {
         this.batchUseCase = batchUseCase;
         this.scanner = scanner;
@@ -71,7 +70,6 @@ public final class BatchManagementCLI {
         try {
             String productCode = getValidProductCode("Enter product code: ");
 
-            // Validate product exists
             if (!batchUseCase.productExists(productCode)) {
                 System.out.println("Error: Product with code '" + productCode + "' does not exist.");
                 System.out.println("Please create the product first before adding batches.");
@@ -118,7 +116,6 @@ public final class BatchManagementCLI {
             displayBatchInfo(batch);
             System.out.println();
 
-            // Show field selection menu
             while (true) {
                 displayUpdateFieldMenu();
                 String choice = scanner.nextLine().trim();
@@ -377,7 +374,6 @@ public final class BatchManagementCLI {
         pressEnterToContinue();
     }
 
-    // Input validation methods with loops for invalid input
     private String getValidProductCode(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -411,7 +407,7 @@ public final class BatchManagementCLI {
             String input = scanner.nextLine().trim();
 
             if (input.isBlank()) {
-                return null; // No expiry date
+                return null;
             }
 
             try {

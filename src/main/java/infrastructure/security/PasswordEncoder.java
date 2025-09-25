@@ -6,11 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-/**
- * Simple password encoder using SHA-256 with salt.
- * This is a basic implementation that doesn't require external dependencies.
- * For production use, consider using BCrypt or other stronger algorithms.
- */
 public final class PasswordEncoder {
 
     private static final String ALGORITHM = "SHA-256";

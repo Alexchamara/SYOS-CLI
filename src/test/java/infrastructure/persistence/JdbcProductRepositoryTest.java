@@ -56,18 +56,15 @@ class JdbcProductRepositoryTest {
         @Test
         @DisplayName("Should upsert product successfully")
         void shouldUpsertProductSuccessfully() throws SQLException {
-            // Given
             Product product = new Product(new Code("PROD001"), "Test Product", Money.of(new BigDecimal("99.99")));
 
-            // When
             productRepository.upsert(product);
 
-            // Then
             verify(connection).prepareStatement(contains("INSERT INTO product"));
             verify(preparedStatement).setString(1, "PROD001");
             verify(preparedStatement).setString(2, "Test Product");
-            verify(preparedStatement).setLong(3, 9999L); // 99.99 * 100 = 9999 cents
-            verify(preparedStatement).setString(4, null); // No category code
+            verify(preparedStatement).setLong(3, 9999L);
+            verify(preparedStatement).setString(4, null);
             verify(preparedStatement).executeUpdate();
             verify(preparedStatement).close();
             verify(connection).close();

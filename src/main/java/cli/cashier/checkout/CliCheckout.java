@@ -70,7 +70,6 @@ public final class CliCheckout {
                 continue;
             }
 
-            // Handle product code input
             String code = input;
             if (!quote.productExists(code)) {
                 System.out.println("Invalid code: " + code);
@@ -84,7 +83,6 @@ public final class CliCheckout {
                 continue;
             }
 
-            // Check availability and handle restocking for this item
             int finalQuantity = handleItemRestocking(sc, code, qty);
             if (finalQuantity > 0) {
                 addToCart(cart, code, finalQuantity);
@@ -99,7 +97,6 @@ public final class CliCheckout {
             return;
         }
 
-        // Continue with normal checkout process
         continueNormalCheckout(sc, cart);
     }
 
@@ -119,7 +116,6 @@ public final class CliCheckout {
         for (int i = 0; i < cart.size(); i++) {
             CashItem item = cart.get(i);
 
-            // Check for discounts on this product
             var activeDiscounts = discountService.getActiveDiscountsForProduct(item.code(), java.time.LocalDate.now());
             String discountInfo = "None";
 
@@ -139,7 +135,6 @@ public final class CliCheckout {
         System.out.println("---------------------------------------------------------------");
         System.out.println("Total items: " + cart.size());
 
-        // Show preview with discounts applied
         try {
             var previewWithDiscounts = quote.preview(cart, new BatchDiscountPolicy(discountService));
             var previewWithoutDiscounts = quote.preview(cart, new NoDiscount());
@@ -194,11 +189,9 @@ public final class CliCheckout {
      * Add item to cart, consolidating quantities if the same product already exists
      */
     private void addToCart(List<CashItem> cart, String code, int quantity) {
-        // Check if product already exists in cart
         for (int i = 0; i < cart.size(); i++) {
             CashItem existingItem = cart.get(i);
             if (existingItem.code().equals(code)) {
-                // Replace with combined quantity
                 int newQuantity = existingItem.qty() + quantity;
                 cart.set(i, new CashItem(code, newQuantity));
                 System.out.println("Updated existing item. New quantity: " + newQuantity);
@@ -206,7 +199,6 @@ public final class CliCheckout {
             }
         }
 
-        // Product not in cart, add new item
         cart.add(new CashItem(code, quantity));
     }
 
@@ -241,7 +233,6 @@ public final class CliCheckout {
             if ("y".equalsIgnoreCase(sc.next())) {
                 try {
                     System.out.println("Transferring " + neededFromMain + " units from MAIN_STORE to SHELF...");
-                    // Use existing transfer method from availability service
                     transferFromMainToShelf(code, neededFromMain);
                     System.out.println("Transfer completed successfully!");
                     return requestedQty;
@@ -332,14 +323,13 @@ public final class CliCheckout {
                 return availableQty;
             }
         }
-        return 0; // Item will not be added to cart
+        return 0;
     }
 
     /**
      * Transfer stock from MAIN_STORE to SHELF
      */
     private void transferFromMainToShelf(String productCode, int quantity) throws Exception {
-        // Use the existing inventory repository transfer method
         availability.transferStock(productCode, StockLocation.MAIN_STORE, StockLocation.SHELF, quantity);
     }
 
@@ -347,12 +337,10 @@ public final class CliCheckout {
      * Transfer stock from WEB to MAIN_STORE
      */
     private void transferFromWebToMain(String productCode, int quantity) throws Exception {
-        // Use the existing inventory repository transfer method
         availability.transferStock(productCode, StockLocation.WEB, StockLocation.MAIN_STORE, quantity);
     }
 
     private void continueNormalCheckout(Scanner sc, List<CashItem> cart) {
-        // Default sell from SHELF (since we've handled restocking above)
         StockLocation loc = StockLocation.SHELF;
 
         // Apply automatic batch-based discounts - no manual discount entry for cashiers
@@ -364,14 +352,12 @@ public final class CliCheckout {
         var q = quote.preview(cart, policy);
         BillPrinter.printPreview(q);
 
-        // Show discount information if any discounts were applied
         if (q.discount().amount().compareTo(java.math.BigDecimal.ZERO) > 0) {
-            System.out.println("✓ Automatic discounts applied: " + Currency.formatSimple(q.discount()));
+            System.out.println("Automatic discounts applied: " + Currency.formatSimple(q.discount()));
         } else {
             System.out.println("No discounts available for current items.");
         }
 
-        // CASH LOOP (in cents)
         long needCents = q.total().amount().movePointRight(2).longValueExact();
         long cash;
         while (true) {
@@ -384,7 +370,6 @@ public final class CliCheckout {
             break;
         }
 
-        // Confirm & save
         System.out.print("Confirm checkout? [y/N]: ");
         if (!"y".equalsIgnoreCase(sc.next())) {
             System.out.println("Cancelled.");

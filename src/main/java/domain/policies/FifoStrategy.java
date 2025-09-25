@@ -13,8 +13,7 @@ public final class FifoStrategy extends AbstractBatchStrategy {
 
     @Override
     protected List<Batch> candidates(Connection con, Code productCode, StockLocation location) {
-        // We already fetch in (expiry NULL last, expiry asc, received_at asc) order.
-        // FIFO means we ignore expiry prioritization: treat null expiry as “last” which is fine here.
+        // FIFO means ignore expiry prioritization: treat null expiry as “last” which is fine here.
         return inventory.findDeductionCandidates(con, productCode, location);
     }
 }

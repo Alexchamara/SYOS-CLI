@@ -26,7 +26,6 @@ public final class CategoryManagementUseCase {
     }
 
     public CreateCategoryResult createCategory(CreateCategoryRequest request) {
-        // Check if category already exists
         Optional<Category> existing = categoryRepository.findByCode(request.code);
 
         Category category = new Category(
@@ -34,7 +33,7 @@ public final class CategoryManagementUseCase {
             request.name,
             request.description,
             request.prefix,
-            1, // Start sequence at 1
+            1,
             request.displayOrder,
             true
         );

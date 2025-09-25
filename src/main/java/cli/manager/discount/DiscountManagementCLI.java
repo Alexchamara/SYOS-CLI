@@ -83,14 +83,14 @@ public class DiscountManagementCLI {
                 discountUseCase.createDiscount(request, currentUser);
 
             if (result.isSuccess()) {
-                System.out.println("✓ Discount created successfully!");
+                System.out.println("Discount created successfully!");
                 printDiscountDetails(result.getDiscount());
             } else {
-                System.out.println("✗ Failed to create discount: " + result.getErrorMessage());
+                System.out.println("Failed to create discount: " + result.getErrorMessage());
             }
 
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -107,7 +107,7 @@ public class DiscountManagementCLI {
                 .findFirst();
 
             if (existingDiscount.isEmpty()) {
-                System.out.println("✗ Discount not found!");
+                System.out.println("Discount not found!");
                 return;
             }
 
@@ -137,14 +137,14 @@ public class DiscountManagementCLI {
                 discountUseCase.updateDiscount(request, currentUser);
 
             if (result.isSuccess()) {
-                System.out.println("✓ Discount updated successfully!");
+                System.out.println("Discount updated successfully!");
                 printDiscountDetails(result.getDiscount());
             } else {
-                System.out.println("✗ Failed to update discount: " + result.getErrorMessage());
+                System.out.println("Failed to update discount: " + result.getErrorMessage());
             }
 
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -166,9 +166,9 @@ public class DiscountManagementCLI {
                 discountUseCase.deleteDiscount(discountId, currentUser);
 
             if (result.isSuccess()) {
-                System.out.println("✓ Discount deleted successfully!");
+                System.out.println("Discount deleted successfully!");
             } else {
-                System.out.println("✗ Failed to delete discount: " + result.getErrorMessage());
+                System.out.println("Failed to delete discount: " + result.getErrorMessage());
             }
 
         } catch (Exception e) {
@@ -209,7 +209,7 @@ public class DiscountManagementCLI {
             printDiscountsTable(discounts);
 
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -230,7 +230,7 @@ public class DiscountManagementCLI {
             printDiscountsTable(activeDiscounts);
 
         } catch (Exception e) {
-            System.out.println("✗ Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -268,7 +268,7 @@ public class DiscountManagementCLI {
         if (discount.getType() == Discount.DiscountType.PERCENTAGE) {
             return discount.getValue() + "%";
         } else {
-            return "$" + discount.getValue();
+            return "Rs." + discount.getValue();
         }
     }
 

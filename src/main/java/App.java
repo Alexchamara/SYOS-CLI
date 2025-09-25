@@ -112,7 +112,6 @@ public class App {
             String choice = scanner.nextLine().trim();
 
             if ("1".equals(choice)) {
-                // CLI login flow
                 var login = new LoginScreen(authUseCase);
                 AuthenticationUseCase.Session session = null;
 

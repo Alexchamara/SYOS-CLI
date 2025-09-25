@@ -86,7 +86,6 @@ public final class ProductManagementUseCase {
 
         Product product;
         if (existingProduct.isPresent()) {
-            // When updating, preserve the existing category
             String existingCategory = existingProduct.get().categoryCode();
             product = new Product(
                 code,
@@ -95,7 +94,6 @@ public final class ProductManagementUseCase {
                 existingCategory
             );
         } else {
-            // When creating new, use the basic constructor (no category)
             product = new Product(
                 code,
                 request.name(),
@@ -111,7 +109,6 @@ public final class ProductManagementUseCase {
     public CreateProductWithCategoryResult createProductWithCategory(CreateProductWithCategoryRequest request) {
         validateCreateWithCategoryRequest(request);
 
-        // Generate product code automatically based on category
         String generatedCode = categoryUseCase.generateProductCode(request.categoryCode());
 
         Code code = new Code(generatedCode);
@@ -127,7 +124,6 @@ public final class ProductManagementUseCase {
         return new CreateProductWithCategoryResult(CreateResult.SUCCESS, generatedCode);
     }
 
-    // Added method expected by tests: getProductByCode
     public Optional<ProductInfo> getProductByCode(String code) {
         return findProduct(code);
     }
@@ -141,7 +137,6 @@ public final class ProductManagementUseCase {
             .map(ProductInfo::new);
     }
 
-    // Added method expected by tests: getAllProducts
     public List<ProductInfo> getAllProducts() {
         return listAllProducts();
     }
@@ -163,7 +158,6 @@ public final class ProductManagementUseCase {
         if (!exists) {
             return DeleteResult.NOT_FOUND;
         }
-        // Attempt deletion but don't rely on the return value for the result as per test expectations
         productRepository.deleteByCode(c);
         return DeleteResult.SUCCESS;
     }
@@ -210,9 +204,7 @@ public final class ProductManagementUseCase {
         public CreateResult result() { return result; }
         public String generatedCode() { return generatedCode; }
 
-        // Convenience accessors expected by tests
         public boolean isSuccess() {
-            // Both SUCCESS and UPDATED are considered successful outcomes
             return result == CreateResult.SUCCESS || result == CreateResult.UPDATED;
         }
         public String getGeneratedCode() { return generatedCode; }

@@ -34,7 +34,6 @@ public class DailySalesScreen {
                 })
                 .toList();
 
-            // Show all data without pagination
             TablePrinter.printDailySalesTable(rows, 0, 1);
 
             System.out.println("\nFilters: " + formatFilters(filters));

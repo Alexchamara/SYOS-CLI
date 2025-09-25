@@ -1,4 +1,4 @@
-package main.java.application.usecase;
+package application.usecase;
 
 import domain.repository.UserRepository;
 import domain.user.Role;
@@ -9,10 +9,7 @@ import infrastructure.security.PasswordEncoder;
  */
 public final class AuthenticationUseCase {
 
-    public record Session(String identifier, Role role, Long userId) {
-        // For staff users (CASHIER/MANAGER), identifier is username, userId is null
-        // For web users (USER), identifier is email, userId is the customer ID
-    }
+    public record Session(String identifier, Role role, Long userId) { }
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -75,30 +72,11 @@ public final class AuthenticationUseCase {
             throw new IllegalArgumentException("Full name is required");
         }
 
-        // Check if user already exists
         if (userRepository.findWebCustomerByEmail(email) != null) {
             throw new IllegalArgumentException("User with this email already exists");
         }
 
         String passwordHash = passwordEncoder.hash(password);
         return userRepository.createWebCustomer(email, passwordHash, fullName);
-    }
-
-    /**
-     * Unified login method that tries both staff and web user authentication
-     * First tries staff login by username, then web user login by email
-     */
-    public Session login(String identifier, String password) {
-        try {
-            // Try staff login first
-            return loginStaff(identifier, password);
-        } catch (IllegalArgumentException e) {
-            // If staff login fails, try web user login
-            try {
-                return loginWebUser(identifier, password);
-            } catch (IllegalArgumentException webException) {
-                throw new IllegalArgumentException("Invalid credentials");
-            }
-        }
     }
 }

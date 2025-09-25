@@ -73,7 +73,7 @@ public final class Discount {
     public Money applyDiscount(Money originalPrice) {
         Money discountAmount = calculateDiscountAmount(originalPrice);
         Money result = originalPrice.minus(discountAmount);
-        // Ensure price never goes below zero
+
         return result.amount().compareTo(BigDecimal.ZERO) < 0 ? Money.of(0) : result;
     }
 

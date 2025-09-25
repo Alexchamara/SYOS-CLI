@@ -28,5 +28,5 @@ public final class Currency {
         return formatSimple(money.amount());
     }
 
-    private Currency() {} // Utility class
+    private Currency() {}
 }

@@ -25,10 +25,8 @@ public class Db implements AutoCloseable {
         LOGGER.setLevel(Level.WARNING);
     }
 
-    // Properties file name
     private static final String PROPERTIES_FILE = "application.properties";
 
-    // Classpath locations inside src/main/resources
     private static final String[] MIGRATION_SCRIPTS = {
             "db/migration/V1__create_users_table.sql",
             "db/migration/V2__init_product_and_batch.sql",
@@ -52,7 +50,7 @@ public class Db implements AutoCloseable {
     private final String username;
     private final String password;
 
-    private Connection currentConnection; // optional, if you later add pooling
+    private Connection currentConnection;
 
     /**
      * Creates a new database configuration instance.
@@ -169,7 +167,7 @@ public class Db implements AutoCloseable {
         Properties props = new Properties();
         props.setProperty("db.url", "jdbc:mysql://localhost:3306/SYOS?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
         props.setProperty("db.user", "Alex");
-        props.setProperty("db.pass", "Alex@20020930"); // empty by default
+        props.setProperty("db.pass", "Alex@20020930");
 
         LOGGER.fine("Using default database properties");
         return props;
@@ -250,7 +248,6 @@ public class Db implements AutoCloseable {
 
     /** Read a resource file from classpath into a String. */
     private String readResourceFile(String resourcePath) {
-        // Accept both "db/migration/..." and "/db/migration/..."
         String normalized = resourcePath.startsWith("/") ? resourcePath.substring(1) : resourcePath;
 
         InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(normalized);

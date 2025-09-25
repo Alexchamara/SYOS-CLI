@@ -279,7 +279,7 @@ public class JdbcReportRepository implements ReportRepository {
                     results.add(new BillHeaderRow(
                         rowNo++,
                         rs.getLong("id"),
-                        rs.getString("serial"),  // Changed from getLong to getString
+                        rs.getString("serial"),
                         rs.getString("type"),
                         rs.getString("store"),
                         rs.getObject("date_time", LocalDateTime.class),

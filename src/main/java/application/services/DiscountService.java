@@ -29,8 +29,6 @@ public class DiscountService {
             return Optional.empty();
         }
 
-        // Find the discount that gives the maximum discount amount
-        // For simplicity, we'll assume a standard price to compare percentage discounts
         Money standardPrice = Money.of(100); // $100 as reference
 
         return activeDiscounts.stream()
@@ -95,11 +93,8 @@ public class DiscountService {
 
             String typeDescription;
             if (appliedDiscount.getType() == Discount.DiscountType.PERCENTAGE) {
-                // Format percentage without unnecessary trailing zeros for display
                 BigDecimal value = appliedDiscount.getValue();
-                // Remove trailing zeros but keep at least one decimal place if needed
                 String formattedValue = value.stripTrailingZeros().toPlainString();
-                // If it's a whole number, add .0 for consistency with test expectations
                 if (!formattedValue.contains(".")) {
                     formattedValue += ".0";
                 }

@@ -10,7 +10,7 @@ import java.util.List;
  * Discount policy that applies a percentage discount to the total.
  */
 public final class PercentDiscount implements DiscountPolicy {
-    private final int percent; // e.g. 5 = 5%
+    private final int percent;
 
     public PercentDiscount(int percent) {
         if (percent < 0 || percent > 100) throw new IllegalArgumentException("percent 0..100");

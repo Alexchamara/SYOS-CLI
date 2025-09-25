@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 public final class CheckoutUseCase {
     private final Tx tx;
 
-    // Common dependencies
     private final ProductRepository productRepository;
     private final InventoryRepository inventoryRepository;
     private final AvailabilityService availabilityService;
@@ -81,7 +80,7 @@ public final class CheckoutUseCase {
         this.fefoStrategy = fefoStrategy;
     }
 
-    // Additional constructor for cash-only scenarios (backward compatibility)
+    // Additional constructor for cash-only scenarios
     public CheckoutUseCase(
             Tx tx,
             ProductRepository productRepository,
@@ -150,16 +149,14 @@ public final class CheckoutUseCase {
                     int takenShelf = batchStrategy.deductUpTo(con, code, qty, StockLocation.SHELF);
                     int remaining = qty - takenShelf;
                     if (remaining > 0) {
-                        // Deduct remainder from WEB (throws if not enough there)
                         batchStrategy.deduct(con, code, remaining, StockLocation.WEB);
                     }
                 } else {
-                    // Pure single-location deduction (WEB or others in future)
                     batchStrategy.deduct(con, code, qty, location);
                 }
             }
 
-            return bill; // Return the complete bill with all line items
+            return bill;
         });
     }
 
@@ -168,7 +165,7 @@ public final class CheckoutUseCase {
      */
     public CardCheckoutResult checkoutCard(long userId, DiscountPolicy discountPolicy, CardDetails cardDetails) {
         return tx.inTx(con -> {
-            // 1. Load WEB cart items
+            // 1) Load WEB cart items
             long cartId = cartRepository.getOrCreateCart(userId);
             List<CartRepository.CartItem> cartItems = cartRepository.items(cartId);
 
@@ -176,7 +173,7 @@ public final class CheckoutUseCase {
                 throw new IllegalStateException("Cart is empty");
             }
 
-            // 2. Availability check at WEB for whole cart
+            // 2) Availability check at WEB for whole cart
             for (CartRepository.CartItem item : cartItems) {
                 int available = availabilityService.available(item.productCode, StockLocation.WEB);
                 if (available < item.qty) {
@@ -186,7 +183,7 @@ public final class CheckoutUseCase {
                 }
             }
 
-            // 3. Create Preview Bill using Quote builder
+            // 3) Create Preview Bill using Quote builder
             List<QuoteUseCase.Item> quoteItems = cartItems.stream()
                     .map(item -> {
                         var product = productRepository.findByCode(new Code(item.productCode));
@@ -200,14 +197,14 @@ public final class CheckoutUseCase {
 
             QuoteUseCase.Quote quote = quoteUseCase.quote(quoteItems, discountPolicy);
 
-            // 4. Get next ONLINE serial
+            // 4) Get next ONLINE serial
             long billSerial = orderRepository.nextBillSerial("ONLINE");
 
-            // 5. Save PREVIEW order + lines
+            // 5) Save PREVIEW order + lines
             long orderId = orderRepository.savePreview("ONLINE", "WEB", userId, quote);
             orderRepository.saveLines(orderId, quote.lines());
 
-            // 6. Validate card
+            // 6) Validate card
             if (!cardDetails.isValid()) {
                 throw new InvalidCardException("Card details are invalid");
             }

@@ -21,7 +21,6 @@ public final class LoginScreen {
         try {
             var session = auth.loginStaff(u, p);
 
-            // Check if user role is allowed for CLI access
             if (session.role() == Role.USER) {
                 throw new IllegalArgumentException("USER role is not allowed to access CLI interface. Please use the Web Shop interface.");
             }

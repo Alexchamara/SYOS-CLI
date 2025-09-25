@@ -82,7 +82,7 @@ public final class JdbcUserRepository implements UserRepository {
             }
         } catch (RuntimeException e) {
             if (e.getMessage().equals("Failed to get generated user ID")) {
-                throw e; // Re-throw specific message as expected by tests
+                throw e;
             }
             throw new RuntimeException("Failed to create web customer: " + e.getMessage(), e);
         } catch (Exception e) {

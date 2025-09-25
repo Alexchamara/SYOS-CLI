@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Bill {
-    private final long id;              // DB PK (0 for new)
+    private final long id;
     private final String serial;        // generated (e.g., YYYYMMDD-####)
     private final LocalDateTime dateTime;
     private final List<BillLine> lines;

@@ -13,7 +13,6 @@ public final class FefoStrategy extends AbstractBatchStrategy {
 
     @Override
     protected List<Batch> candidates(Connection con, Code productCode, StockLocation location) {
-        // Same ordered query already prioritizes earlier expiry first, then oldest received.
         return inventory.findDeductionCandidates(con, productCode, location);
     }
 }

@@ -9,5 +9,8 @@
         <module name="syos-pos" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="syos_pos" target="24" />
+    </bytecodeTargetLevel>
   </component>
 </project>

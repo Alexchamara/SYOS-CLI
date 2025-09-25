@@ -32,7 +32,6 @@ public class OnlineCartUseCase {
             throw new IllegalArgumentException("Quantity must be greater than 0");
         }
 
-        // Verify product exists
         var product = productRepository.findByCode(new Code(productCode));
         if (product.isEmpty()) {
             throw new IllegalArgumentException("Product not found: " + productCode);

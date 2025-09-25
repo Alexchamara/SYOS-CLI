@@ -36,7 +36,6 @@ public class OrderReportScreen {
                 })
                 .toList();
 
-            // Show all data without pagination
             TablePrinter.printOrderHeaderTable(rows, 0, 1);
 
             System.out.println("\nFilters: " + formatFilters(filters));

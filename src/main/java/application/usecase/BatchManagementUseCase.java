@@ -25,7 +25,6 @@ public final class BatchManagementUseCase {
         this.productRepository = productRepository;
     }
 
-    // ProductManagementUseCase pattern
     public static final class CreateBatchRequest {
         private final String productCode;
         private final StockLocation location;
@@ -61,7 +60,6 @@ public final class BatchManagementUseCase {
         public int quantity() { return quantity; }
     }
 
-    // ProductManagementUseCase pattern
     public static final class BatchInfo {
         private final long id;
         private final String productCode;
@@ -111,11 +109,9 @@ public final class BatchManagementUseCase {
      */
     public CreateResult createBatch(CreateBatchRequest request) {
         try {
-            // Basic validation
             validateCreateRequest(request);
 
             return tx.inTx(con -> {
-                // Validate product exists
                 var product = productRepository.findByCode(new Code(request.productCode()));
                 if (product.isEmpty()) {
                     return CreateResult.PRODUCT_NOT_EXISTS;
@@ -142,7 +138,6 @@ public final class BatchManagementUseCase {
      */
     public UpdateResult updateBatch(UpdateBatchRequest request) {
         try {
-            // Basic validation
             if (request.batchId() <= 0) {
                 throw new IllegalArgumentException("Batch ID must be positive");
             }
@@ -154,7 +149,6 @@ public final class BatchManagementUseCase {
             }
 
             return tx.inTx(con -> {
-                // Check if batch exists
                 if (!inventoryRepository.batchExists(con, request.batchId())) {
                     return UpdateResult.NOT_FOUND;
                 }

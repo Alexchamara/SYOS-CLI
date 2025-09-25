@@ -51,7 +51,7 @@ class DiscountServiceTest {
             Discount discount2 = new Discount(2L, batchId, DiscountType.PERCENTAGE, new BigDecimal("15.00"),
                 date, date.plusDays(30), true, "15% off", 1L);
             Discount discount3 = new Discount(3L, batchId, DiscountType.FIXED_AMOUNT, new BigDecimal("8.00"),
-                date, date.plusDays(30), true, "$8 off", 1L);
+                date, date.plusDays(30), true, "8 off", 1L);
 
             when(discountManagementUseCase.getActiveDiscountsForBatch(batchId, date))
                 .thenReturn(List.of(discount1, discount2, discount3));

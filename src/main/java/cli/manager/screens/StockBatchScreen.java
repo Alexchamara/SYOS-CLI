@@ -34,7 +34,6 @@ public class StockBatchScreen {
                 })
                 .toList();
 
-            // Show all data without pagination
             TablePrinter.printStockBatchTable(rows, 0, 1);
 
             System.out.println("\nFilters: " + formatFilters(filters));

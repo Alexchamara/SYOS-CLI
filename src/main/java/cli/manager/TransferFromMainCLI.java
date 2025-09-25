@@ -34,34 +34,34 @@ public final class TransferFromMainCLI {
 
         while (true) {
             try {
-                // Step 1: Get and validate product code
+                // Get and validate product code
                 String productCode = getValidProductCode(sc);
                 if (productCode == null) return;
 
-                // Step 2: Show current stock levels across all locations
+                // Show current stock levels across all locations
                 showStockLevels(productCode);
 
-                // Step 3: Get source location
+                // Get source location
                 StockLocation fromLocation = getValidSourceLocation(sc, productCode);
                 if (fromLocation == null) continue;
 
-                // Step 4: Get destination location
+                // Get destination location
                 StockLocation toLocation = getValidDestinationLocation(sc, fromLocation);
                 if (toLocation == null) continue;
 
-                // Step 5: Show batch details if requested
+                // Show batch details if requested
                 if (askToShowBatchDetails(sc, productCode, fromLocation)) {
                     showBatchDetails(productCode, fromLocation);
                 }
 
-                // Step 6: Get and validate quantity
+                // Get and validate quantity
                 int quantity = getValidQuantity(sc, productCode, fromLocation);
-                if (quantity <= 0) continue; // User chose to go back
+                if (quantity <= 0) continue;
 
-                // Step 7: Confirm and execute transfer
+                // Confirm and execute transfer
                 if (confirmTransfer(sc, productCode, fromLocation, toLocation, quantity)) {
                     executeTransfer(productCode, fromLocation, toLocation, quantity);
-                    System.out.println("✓ Transfer completed successfully!");
+                    System.out.println("Transfer completed successfully!");
 
                     // Show updated stock levels
                     System.out.println("\n=== Updated Stock Levels ===");
@@ -77,7 +77,7 @@ public final class TransferFromMainCLI {
                 }
 
             } catch (Exception e) {
-                System.out.println("✗ Error: " + e.getMessage());
+                System.out.println("Error: " + e.getMessage());
                 System.out.println("Please try again.");
             }
         }
@@ -95,13 +95,13 @@ public final class TransferFromMainCLI {
             }
 
             if (code.isEmpty()) {
-                System.out.println("✗ Product code cannot be empty. Please try again.");
+                System.out.println("Product code cannot be empty. Please try again.");
                 continue;
             }
 
             // Validate product exists
             if (!quoteUseCase.productExists(code)) {
-                System.out.println("✗ Product code '" + code + "' does not exist. Please try again.");
+                System.out.println("Product code '" + code + "' does not exist. Please try again.");
                 continue;
             }
 
@@ -161,12 +161,12 @@ public final class TransferFromMainCLI {
             try {
                 location = StockLocation.valueOf(input);
             } catch (IllegalArgumentException e) {
-                System.out.println("✗ Invalid location. Valid options: MAIN_STORE, SHELF, WEB");
+                System.out.println("Invalid location. Valid options: MAIN_STORE, SHELF, WEB");
                 continue;
             }
 
             if (location == fromLocation) {
-                System.out.println("✗ Destination cannot be the same as source location");
+                System.out.println("Destination cannot be the same as source location");
                 continue;
             }
 
@@ -195,7 +195,7 @@ public final class TransferFromMainCLI {
             for (Batch batch : batches) {
                 System.out.printf("%-10d %-20s %-12s %-10d%n",
                     batch.id(),
-                    batch.receivedAt().toString().substring(0, 16), // Show date and time without seconds
+                    batch.receivedAt().toString().substring(0, 16),
                     batch.expiry() != null ? batch.expiry().toString() : "No expiry",
                     batch.quantity().value()
                 );
@@ -214,7 +214,7 @@ public final class TransferFromMainCLI {
                 int quantity = sc.nextInt();
 
                 if (quantity == 0) {
-                    return 0; // Go back
+                    return 0;
                 }
 
                 if (quantity < 0) {
@@ -231,7 +231,7 @@ public final class TransferFromMainCLI {
 
             } catch (Exception e) {
                 System.out.println("✗ Invalid number. Please enter a valid quantity.");
-                sc.nextLine(); // Clear invalid input
+                sc.nextLine();
             }
         }
     }

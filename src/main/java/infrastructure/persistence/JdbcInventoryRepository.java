@@ -114,7 +114,6 @@ public final class JdbcInventoryRepository implements InventoryRepository {
             Long existingBatchId = findExistingBatch(con, productCode, toLocation, batch.expiry());
 
             if (existingBatchId != null) {
-                // Update existing batch quantity
                 String updateSql = "UPDATE batch SET quantity = quantity + ?, version = version + 1 WHERE id = ?";
                 try (var ps = con.prepareStatement(updateSql)) {
                     ps.setInt(1, toTransfer);
@@ -188,7 +187,8 @@ public final class JdbcInventoryRepository implements InventoryRepository {
     }
 
     /**
-     * Show the remaning quantity for specific batch*/
+     * Show the remaning quantity for specific batch
+     */
     @Override
     public int remainingQuantity(java.sql.Connection con, String code, String location) {
         String sql = "SELECT COALESCE(SUM(quantity),0) q FROM batch WHERE product_code=? AND UPPER(location)=UPPER(?)";
@@ -415,7 +415,6 @@ public final class JdbcInventoryRepository implements InventoryRepository {
      */
     @Override
     public void deleteBatch(Connection con, long batchId) {
-        // First verify the batch exists
         if (!batchExists(con, batchId)) {
             throw new IllegalArgumentException("Batch with ID " + batchId + " does not exist");
         }

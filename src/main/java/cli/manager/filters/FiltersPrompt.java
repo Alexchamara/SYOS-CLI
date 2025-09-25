@@ -66,7 +66,7 @@ public final class FiltersPrompt {
         while (true) {
             System.out.print("Enter from date (yyyy-mm-dd): ");
             if (!scanner.hasNextLine()) {
-                return LocalDate.now(); // Default to today if no input available
+                return LocalDate.now();
             }
             String input = scanner.nextLine();
             try {
@@ -81,7 +81,7 @@ public final class FiltersPrompt {
         while (true) {
             System.out.print("Enter to date (yyyy-mm-dd): ");
             if (!scanner.hasNextLine()) {
-                return fromDate; // Default to fromDate if no input available
+                return fromDate;
             }
             String input = scanner.nextLine();
             try {
@@ -101,7 +101,7 @@ public final class FiltersPrompt {
         while (true) {
             System.out.print("Enter to date (yyyy-mm-dd): ");
             if (!scanner.hasNextLine()) {
-                return LocalDate.now(); // Default to today if no input available
+                return LocalDate.now();
             }
             String input = scanner.nextLine();
             try {

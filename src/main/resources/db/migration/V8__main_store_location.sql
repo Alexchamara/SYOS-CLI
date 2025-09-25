@@ -1,10 +1,3 @@
--- If you used ENUM for location before, ALTER it to include MAIN.
--- If your 'location' is VARCHAR (most likely), nothing to change for type.
--- We'll just normalize and add helpful indexes.
-
--- normalize all existing to uppercase
-# UPDATE batch SET location = UPPER(location);
-
 -- helpful composite index
 CREATE INDEX IF NOT EXISTS ix_batch_code_loc_exp ON batch(product_code, location, expiry, received_at);
 
